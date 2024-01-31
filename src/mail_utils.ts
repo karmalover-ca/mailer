@@ -25,6 +25,5 @@ export async function sendMail(subject: string, msg: string, bcc: string[]) {
         if (error) {
             return LOGGER.error(error.message);
         }
-        LOGGER.debug("Email sent: " + info.response);
     });
 };

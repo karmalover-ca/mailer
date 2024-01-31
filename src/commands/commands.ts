@@ -3,12 +3,14 @@ import { APPLICATION_ID, BOT_TOKEN, DEV_ENVIRONMENT, DEV_SERVER_ID, LOGGER } fro
 
 import BaseCommand, { ApplicationCommandStructure } from "./base_command";
 import PingCommand from "./ping_command";
+import TestCommand from "./send_command";
 
 const rest = new REST({ version: "10" }).setToken(BOT_TOKEN);
 
 // new commands get added here
 const commands: BaseCommand[] = [
-    new PingCommand()
+    new PingCommand(),
+    new TestCommand()
 ];
 
 const validationRegex = /^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$/u;
