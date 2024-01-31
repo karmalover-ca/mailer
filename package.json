@@ -1,0 +1,19 @@
+{
+  "name": "mailer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/karmalover-ca/mailer",
+  "author": "Liam Pilson (karmalover-ca)",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn run tsc",
+    "dev": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.5",
+    "chalk": "4",
+    "discord.js": "^14.13.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
