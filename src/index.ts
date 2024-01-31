@@ -1,1 +1,3 @@
-console.log("uwu")
+import { LOGGER } from "./constants";
+
+LOGGER.debug("uwu");
