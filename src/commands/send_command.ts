@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ApplicationCommandOptionType, ChatInputCommandInteraction, ModalBuilder, PermissionFlagsBits, TextInputBuilder, TextInputStyle } from "discord.js";
-import { LOGGER } from "../constants";
+import { CHANNEL_ID, LOGGER } from "../constants";
 import BaseCommand from "./base_command";
 
 class TestCommand extends BaseCommand {
@@ -21,14 +21,14 @@ class TestCommand extends BaseCommand {
 
         const subjectInput = new TextInputBuilder()
             .setCustomId("subjectInput")
-            .setLabel("Subject")
+            .setLabel("Subject Only for Email")
             .setStyle(TextInputStyle.Short)
             .setMinLength(1)
             .setRequired(true);
 
         const msgInput = new TextInputBuilder()
             .setCustomId("msgInput")
-            .setLabel("Message")
+            .setLabel("Message (adds Role ping at bottom)")
             .setStyle(TextInputStyle.Paragraph)
             .setMinLength(1)
             .setRequired(true);

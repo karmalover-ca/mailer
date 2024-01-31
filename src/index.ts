@@ -1,7 +1,8 @@
 import { Client } from "discord.js";
 import { commandHandler, registerCommands } from "./commands/commands";
-import { BOT_TOKEN, VERSION_STRING, LOGGER } from "./constants";
+import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID } from "./constants";
 import { sendMail } from "./mail_utils";
+import { channel } from "diagnostics_channel";
 
 const client = new Client({
     intents: ["DirectMessages","DirectMessageTyping","DirectMessageReactions","GuildMessages","GuildMessageTyping","GuildMessageReactions"]
@@ -9,6 +10,7 @@ const client = new Client({
 
 client.on("ready", () => {
     LOGGER.info(`Mailer online. ${VERSION_STRING}`);
+    
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -20,6 +22,9 @@ client.on("interactionCreate", async (interaction) => {
         const msg = interaction.fields.getTextInputValue("msgInput");
 
         await sendMail(subject, msg, ["liamphone0@gmail.com"]);
+
+        client.channels.fetch(CHANNEL_ID)
+        .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + ROLE_ID + ">")});
     }
 });
 
