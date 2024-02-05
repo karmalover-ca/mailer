@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ChatInputCommandInteraction, ModalBuilder, PermissionFlagsBits, TextInputBuilder, TextInputStyle } from "discord.js";
+import { ActionRowBuilder, ChatInputCommandInteraction, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import BaseCommand from "./base_command";
 
 class TestCommand extends BaseCommand {
