@@ -16,7 +16,7 @@ export async function sendMail(subject: string, msg: string, bcc: string[]) {
         from: SMTP_ADDRESS,
         to: SMTP_USER,
         subject: subject,
-        text: msg,
+        text: `${msg}\n\nRespectfully,\nLake Effect Robotics`,
         bcc: bcc,
     };
 
