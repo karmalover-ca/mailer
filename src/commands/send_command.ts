@@ -1,5 +1,4 @@
 import { ActionRowBuilder, ApplicationCommandOptionType, ChatInputCommandInteraction, ModalBuilder, PermissionFlagsBits, TextInputBuilder, TextInputStyle } from "discord.js";
-import { CHANNEL_ID, LOGGER } from "../constants";
 import BaseCommand from "./base_command";
 
 class TestCommand extends BaseCommand {

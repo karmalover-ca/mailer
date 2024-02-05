@@ -1,4 +1,3 @@
-import { error } from "console";
 import {SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LOGGER, SMTP_ADDRESS } from "./constants"
 import nodemailer from "nodemailer";
 

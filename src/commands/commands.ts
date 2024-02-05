@@ -13,8 +13,6 @@ const commands: BaseCommand[] = [
     new TestCommand()
 ];
 
-const validationRegex = /^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$/u;
-
 const registerCommands = () => {
 
     if (DEV_ENVIRONMENT) {

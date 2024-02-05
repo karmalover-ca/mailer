@@ -2,7 +2,6 @@ import { Client } from "discord.js";
 import { commandHandler, registerCommands } from "./commands/commands";
 import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID } from "./constants";
 import { sendMail } from "./mail_utils";
-import { channel } from "diagnostics_channel";
 
 const client = new Client({
     intents: ["DirectMessages","DirectMessageTyping","DirectMessageReactions","GuildMessages","GuildMessageTyping","GuildMessageReactions"]
