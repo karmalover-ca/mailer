@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ChatInputCommandInteraction, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import BaseCommand from "./base_command";
 
-class TestCommand extends BaseCommand {
+class SendCommand extends BaseCommand {
     constructor() {
         super({
             name: "send",
@@ -41,4 +41,4 @@ class TestCommand extends BaseCommand {
     }
 }
 
-export default TestCommand;
+export default SendCommand;

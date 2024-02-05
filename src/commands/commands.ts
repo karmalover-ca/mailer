@@ -3,14 +3,16 @@ import { APPLICATION_ID, BOT_TOKEN, DEV_ENVIRONMENT, DEV_SERVER_ID, LOGGER } fro
 
 import BaseCommand, { ApplicationCommandStructure } from "./base_command";
 import PingCommand from "./ping_command";
-import TestCommand from "./send_command";
+import SendCommand from "./send_command";
+import EmailCommand from "./email_command";
 
 const rest = new REST({ version: "10" }).setToken(BOT_TOKEN);
 
 // new commands get added here
 const commands: BaseCommand[] = [
     new PingCommand(),
-    new TestCommand()
+    new SendCommand(),
+    new EmailCommand()
 ];
 
 const registerCommands = () => {

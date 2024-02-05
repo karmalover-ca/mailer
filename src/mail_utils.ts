@@ -18,6 +18,7 @@ export async function sendMail(subject: string, msg: string, bcc: string[]) {
         subject: subject,
         text: `${msg}\n\nRespectfully,\nLake Effect Robotics`,
         bcc: bcc,
+        replyTo: 'lakeeffectrobotics@gmail.com',
     };
 
     transporter.sendMail(mailOptions, (error, info) => {

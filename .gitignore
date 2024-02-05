@@ -8,3 +8,5 @@ logs
 start.sh
 start.bat
 *.log
+
+emails.json
