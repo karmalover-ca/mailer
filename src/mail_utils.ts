@@ -1,4 +1,4 @@
-import {SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LOGGER, SMTP_ADDRESS } from "./constants"
+import {SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LOGGER, SMTP_ADDRESS, SMTP_REPLY_TO } from "./constants"
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -18,7 +18,7 @@ export async function sendMail(subject: string, msg: string, bcc: string[]) {
         subject: subject,
         text: `${msg}\n\nRespectfully,\nLake Effect Robotics`,
         bcc: bcc,
-        replyTo: 'lakeeffectrobotics@gmail.com',
+        replyTo: SMTP_REPLY_TO,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
