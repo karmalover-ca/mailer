@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 import { commandHandler, registerCommands } from "./commands/commands";
-import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID } from "./constants";
+import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID, DEV_ENVIRONMENT } from "./constants";
 import { sendMail } from "./mail_utils";
 import { EmailManagerImpl } from "./database";
 
