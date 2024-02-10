@@ -53,11 +53,11 @@ class EmailCommand extends BaseCommand {
 
         if (command === "add") {
             emailManager.addEmail(email);
-            await interaction.followUp("Added email to bcc list");
+            await interaction.followUp("Added email to bcc list - " + email);
         }
         if (command === "remove") {
             if (emailManager.removeEmail(email)) {
-                await interaction.followUp("Successfully removed email from bcc list");
+                await interaction.followUp("Successfully removed email from bcc list - " + email);
             } else {
                 await interaction.followUp("Unable to find/remove, specified email. Please check the imput and try again");
             }
