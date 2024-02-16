@@ -17,7 +17,7 @@ client.on("interactionCreate", async (interaction) => {
     if(interaction.isChatInputCommand()) return commandHandler(interaction);
     if(!interaction.isModalSubmit()) return;
     if(interaction.customId === "msgSender") {
-        await interaction.reply({ content: "Message sent" });
+        await interaction.reply({ content: "Message sent", ephemeral: true });
         const subject = interaction.fields.getTextInputValue("subjectInput");
         const msg = interaction.fields.getTextInputValue("msgInput");
         const emailManager = new EmailManagerImpl();
