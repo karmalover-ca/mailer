@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 import { commandHandler, registerCommands } from "./commands/commands";
-import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID, DEV_ENVIRONMENT } from "./constants";
+import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID, DEV_ENVIRONMENT, TEST_ROLE_ID, TEST_CHANNEL_ID } from "./constants";
 import { sendMail } from "./mail_utils";
 import { EmailManagerImpl } from "./database";
 
@@ -15,6 +15,8 @@ client.on("ready", () => {
 
 client.on("interactionCreate", async (interaction) => {
     if(interaction.isChatInputCommand()) return commandHandler(interaction);
+
+    // Checking for modal interaction
     if(!interaction.isModalSubmit()) return;
     if(interaction.customId === "msgSender") {
         await interaction.reply({ content: "Message sent", ephemeral: true });
@@ -27,6 +29,16 @@ client.on("interactionCreate", async (interaction) => {
 
         client.channels.fetch(CHANNEL_ID)
         .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + ROLE_ID + ">")});
+
+    } else if(interaction.customId === "testMsgSender") {
+        await interaction.reply({ content: "Test Message sent", ephemeral: true });
+        const subject = interaction.fields.getTextInputValue("testSubjectInput");
+        const msg = interaction.fields.getTextInputValue("testMsgInput");
+
+        await sendMail(subject, msg, ["lakeeffectrobotics@gmail.com", "liamphone0@gmail.com"]);
+
+        client.channels.fetch(TEST_CHANNEL_ID)
+        .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + TEST_ROLE_ID + ">")});
     }
 });
 

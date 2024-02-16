@@ -5,6 +5,7 @@ import BaseCommand, { ApplicationCommandStructure } from "./base_command";
 import PingCommand from "./ping_command";
 import SendCommand from "./send_command";
 import EmailCommand from "./email_command";
+import TestCommand from "./test_command";
 
 const rest = new REST({ version: "10" }).setToken(BOT_TOKEN);
 
@@ -12,7 +13,8 @@ const rest = new REST({ version: "10" }).setToken(BOT_TOKEN);
 const commands: BaseCommand[] = [
     new PingCommand(),
     new SendCommand(),
-    new EmailCommand()
+    new EmailCommand(),
+    new TestCommand()
 ];
 
 const registerCommands = () => {
