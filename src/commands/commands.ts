@@ -6,6 +6,7 @@ import PingCommand from "./ping_command";
 import SendCommand from "./send_command";
 import EmailCommand from "./email_command";
 import TestCommand from "./test_command";
+import ListEmailsCommand from "./list_emails_command";
 
 const rest = new REST({ version: "10" }).setToken(BOT_TOKEN);
 
@@ -14,6 +15,7 @@ const commands: BaseCommand[] = [
     new PingCommand(),
     new SendCommand(),
     new EmailCommand(),
+    new ListEmailsCommand(),
     new TestCommand()
 ];
 
