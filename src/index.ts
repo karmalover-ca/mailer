@@ -25,7 +25,7 @@ client.on("interactionCreate", async (interaction) => {
         const emailManager = new EmailManagerImpl();
         const bccEmails = emailManager.getEmails();
 
-        await sendMail(subject, msg, bccEmails);
+        await sendMail(subject, msg, ["wartmand@limestone.on.ca"], bccEmails);
 
         client.channels.fetch(CHANNEL_ID)
         .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + ROLE_ID + ">")});
@@ -35,7 +35,7 @@ client.on("interactionCreate", async (interaction) => {
         const subject = interaction.fields.getTextInputValue("testSubjectInput");
         const msg = interaction.fields.getTextInputValue("testMsgInput");
 
-        await sendMail(subject, msg, ["lakeeffectrobotics@gmail.com", "liamphone0@gmail.com"]);
+        await sendMail(subject, msg, ["liamphone0@gmail.com"], ["lakeeffectrobotics@gmail.com"]);
 
         client.channels.fetch(TEST_CHANNEL_ID)
         .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + TEST_ROLE_ID + ">")});

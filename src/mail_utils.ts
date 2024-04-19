@@ -11,12 +11,13 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-export async function sendMail(subject: string, msg: string, bcc: string[]) {
+export async function sendMail(subject: string, msg: string, cc: string[], bcc: string[]) {
     const mailOptions = {
         from: SMTP_ADDRESS,
         to: SMTP_USER,
         subject: subject,
         text: `${msg}\n\nRespectfully,\nLake Effect Robotics`,
+        cc: cc,
         bcc: bcc,
         replyTo: SMTP_REPLY_TO,
     };
