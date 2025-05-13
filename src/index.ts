@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 import { commandHandler, registerCommands } from "./commands/commands";
-import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID, DEV_ENVIRONMENT, TEST_ROLE_ID, TEST_CHANNEL_ID } from "./constants";
+import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID, DEV_ENVIRONMENT, TEST_ROLE_ID, TEST_CHANNEL_ID, CC_EMAILS, TEST_CC_EMAILS, TEST_BCC_EMAILS } from "./constants";
 import { sendMail } from "./mail_utils";
 import { EmailManagerImpl } from "./database";
 
@@ -25,7 +25,7 @@ client.on("interactionCreate", async (interaction) => {
         const emailManager = new EmailManagerImpl();
         const bccEmails = emailManager.getEmails();
 
-        await sendMail(subject, msg, ["wartmand@limestone.on.ca"], bccEmails);
+        await sendMail(subject, msg, CC_EMAILS, bccEmails);
 
         client.channels.fetch(CHANNEL_ID)
         .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + ROLE_ID + ">")});
@@ -35,7 +35,7 @@ client.on("interactionCreate", async (interaction) => {
         const subject = interaction.fields.getTextInputValue("testSubjectInput");
         const msg = interaction.fields.getTextInputValue("testMsgInput");
 
-        await sendMail("*TEST* "+subject, msg, ["liamphone0@gmail.com"], ["lakeeffectrobotics@gmail.com"]);
+        await sendMail("*TEST* "+subject, msg, TEST_CC_EMAILS, TEST_BCC_EMAILS);
 
         client.channels.fetch(TEST_CHANNEL_ID)
         .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + TEST_ROLE_ID + ">")});

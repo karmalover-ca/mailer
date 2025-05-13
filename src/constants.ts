@@ -24,6 +24,10 @@ export const SMTP_PASS = process.env.SMTP_PASS || "";
 export const SMTP_ADDRESS = process.env.SMTP_ADDRESS || "";
 export const SMTP_REPLY_TO = process.env.SMTP_REPLY_TO || "";
 
+export const CC_EMAILS = process.env.CC_EMAILS?.split(" ") || [""];
+export const TEST_CC_EMAILS = process.env.TEST_CC_EMAILS?.split(" ") || [""];
+export const TEST_BCC_EMAILS = process.env.TEST_BCC_EMAILS?.split(" ") || [""];
+
 export const CHANNEL_ID = process.env.CHANNEL_ID || "";
 export const TEST_CHANNEL_ID = process.env.TEST_CHANNEL_ID || "";
 

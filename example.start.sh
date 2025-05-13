@@ -17,6 +17,11 @@ export SMTP_PASS=""
 export SMTP_ADDRESS="Example Name <no-reply@example.com>"
 export SMTP_REPLY_TO="example@gmail.com"
 
+# Separate multiple emails with a single space " "
+export CC_EMAILS="example@example.com e@e.com"
+export TEST_CC_EMAILS=""
+export TEST_BCC_EMAILS=""
+
 #Channel where messages will get sent
 export CHANNEL_ID=""
 export TEST_CHANNEL_ID=""
