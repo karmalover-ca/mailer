@@ -1,0 +1,11 @@
+services:
+  mailer:
+    image: node:22  # Or latest LTS version like node:20
+    container_name: mailer
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "yarn install && yarn dev"
+    env_file:
+      - .docker.env
+    restart: unless-stopped
