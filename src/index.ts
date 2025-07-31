@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import { commandHandler, registerCommands } from "./commands/commands";
+import { commandHandler, fixUnclearedCommands, registerCommands } from "./commands/commands";
 import { BOT_TOKEN, VERSION_STRING, LOGGER, CHANNEL_ID, ROLE_ID, DEV_ENVIRONMENT, TEST_ROLE_ID, TEST_CHANNEL_ID, CC_EMAILS, TEST_CC_EMAILS, TEST_BCC_EMAILS } from "./constants";
 import { sendMail } from "./mail_utils";
 import { EmailManagerImpl } from "./database";
@@ -41,6 +41,9 @@ client.on("interactionCreate", async (interaction) => {
         .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + TEST_ROLE_ID + ">")});
     }
 });
+
+// ! Only use once
+// fixUnclearedCommands();
 
 registerCommands().then(() => {
     return client.login(BOT_TOKEN);

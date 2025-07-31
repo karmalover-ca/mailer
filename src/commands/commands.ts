@@ -19,36 +19,61 @@ const commands: BaseCommand[] = [
     new TestCommand()
 ];
 
-const registerCommands = () => {
+const registerCommands = async () => {
+    try {
+        let definitions;
 
-    if (DEV_ENVIRONMENT) {
-        const definitions = commands.map(c => c.definition);
-        definitions.forEach((v, i, a) => {
-            if (!a[i].name.startsWith("t_")) a[i].name = "t_" + v.name;
-        });
+        if (DEV_ENVIRONMENT) {
+            definitions = commands.map(c => {
+                const name = c.definition.name.startsWith("t_") ? c.definition.name : "t_" + c.definition.name;
+                return { ...c.definition, name };
+            });
 
-        return rest.put(Routes.applicationGuildCommands(APPLICATION_ID, DEV_SERVER_ID as string), {
-            body: definitions
-          });
+            const result = await rest.put(
+                Routes.applicationGuildCommands(APPLICATION_ID, DEV_SERVER_ID as string),
+                { body: definitions }
+            );
+
+            LOGGER.info(`Registered ${definitions.length} dev commands to guild id ${DEV_SERVER_ID}`);
+            return result;
+        }
+
+        // Production
+        definitions = commands.map(c => c.definition);
+
+        const result = await rest.put(
+            Routes.applicationCommands(APPLICATION_ID),
+            { body: definitions }
+        );
+
+        LOGGER.info(`Registered ${definitions.length} global commands`);
+        return result
+    } catch(error) {
+        LOGGER.fatal("Failed to register commands:\n" + error);
     }
-    return rest.put(Routes.applicationCommands(APPLICATION_ID), {
-        body: commands.map(c => c.definition)
-    });
 }
 
-const registerTagCommand = (definition: ApplicationCommandStructure, guildID: Snowflake) => {
-    return rest.post(Routes.applicationGuildCommands(APPLICATION_ID, guildID), {
-        body: definition
-    });
-}
+// Use to fix really stuck commands that don't wanna clear
+// ! Only use once
+const fixUnclearedCommands = async () => {
+    if (DEV_ENVIRONMENT) {
+        const result = await rest.put(
+            Routes.applicationGuildCommands(APPLICATION_ID, DEV_SERVER_ID as string),
+            { body: [] } // Sends a empty array to "clear" the commands
+        );
 
-const removeTagCommand = async (name: string, guildID: Snowflake) => {
-    const commands = (await rest.get(Routes.applicationGuildCommands(APPLICATION_ID, guildID))) as ApplicationCommand[];
-    const c = commands.find(v => v.name == name);
-    if (!c) return false;
+        LOGGER.info("Cleared registered dev commands");
+        return result;
+    }
 
-    await rest.delete(Routes.applicationGuildCommand(APPLICATION_ID, guildID, c.id));
-    return true;
+    // For global commands
+    const result = await rest.put(
+        Routes.applicationCommands(APPLICATION_ID),
+        { body: [] } // Sends a empty array to "clear" the commands
+    );
+
+    LOGGER.info("Cleared registered global commands");
+    return result;
 }
 
 const commandHandler = (interaction: ChatInputCommandInteraction) => {
@@ -60,4 +85,4 @@ const commandHandler = (interaction: ChatInputCommandInteraction) => {
     if (r instanceof Promise) r.catch(LOGGER.error);
 }
 
-export { registerCommands, commandHandler, registerTagCommand, removeTagCommand };
+export { registerCommands, commandHandler, fixUnclearedCommands};
