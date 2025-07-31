@@ -77,9 +77,14 @@ const fixUnclearedCommands = async () => {
 }
 
 const commandHandler = (interaction: ChatInputCommandInteraction) => {
-    if (DEV_ENVIRONMENT && !interaction.commandName.startsWith("t_")) return;
+    let commandName: string = interaction.commandName;
+    if (DEV_ENVIRONMENT) {
+        if (!commandName.startsWith("t_")) return;
 
-    const i = commands.findIndex(v => v.definition.name == interaction.commandName);
+        commandName = commandName.replace(/^t_/, "");
+    }
+
+    const i = commands.findIndex(v => v.definition.name == commandName);
 
     const r = commands[i].handle(interaction);
     if (r instanceof Promise) r.catch(LOGGER.error);
