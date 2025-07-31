@@ -10,3 +10,4 @@ start.bat
 *.log
 
 emails.json
+.docker.env
