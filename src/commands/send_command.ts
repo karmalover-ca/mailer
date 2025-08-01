@@ -30,6 +30,7 @@ class SendCommand extends BaseCommand {
             .setLabel("Message (adds Role ping at bottom)")
             .setStyle(TextInputStyle.Paragraph)
             .setMinLength(1)
+            .setMaxLength(1976)
             .setRequired(true);
 
         const firstActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(subjectInput);

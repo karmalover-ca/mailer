@@ -28,7 +28,7 @@ client.on("interactionCreate", async (interaction) => {
         await sendMail(subject, msg, CC_EMAILS, bccEmails);
 
         client.channels.fetch(CHANNEL_ID)
-        .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + ROLE_ID + ">")});
+        .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + ROLE_ID + ">")}).catch(LOGGER.error);
 
     } else if(interaction.customId === "testMsgSender") {
         await interaction.reply({ content: "Test Message sent", ephemeral: true });
@@ -38,7 +38,7 @@ client.on("interactionCreate", async (interaction) => {
         await sendMail("*TEST* "+subject, msg, TEST_CC_EMAILS, TEST_BCC_EMAILS);
 
         client.channels.fetch(TEST_CHANNEL_ID)
-        .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + TEST_ROLE_ID + ">")});
+        .then(channel => {if(channel?.isTextBased()) channel.send(msg + "\n\n<@&" + TEST_ROLE_ID + ">")}).catch(LOGGER.error);
     }
 });
 
