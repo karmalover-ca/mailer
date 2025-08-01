@@ -17,7 +17,11 @@ class ListEmailsCommand extends BaseCommand {
         await interaction.deferReply({ephemeral: true}).catch(LOGGER.error);
         const emailManager = new EmailManagerImpl();
 
-        await interaction.followUp({content: `\`\`\`json\n${JSON.stringify(emailManager.getEmails(), null, 4)}\`\`\``}).catch(LOGGER.error);
+        let msg: string = `\`\`\`json\n${JSON.stringify(emailManager.getEmails(), null, 4)}\`\`\``
+
+        if (msg.length >= 2000 ) msg = "Message is too big please bully Liam for more info"
+
+        await interaction.followUp({content: msg}).catch(LOGGER.error);
     }
 }
 
